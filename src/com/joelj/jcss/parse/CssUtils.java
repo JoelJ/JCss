@@ -1,6 +1,5 @@
 package com.joelj.jcss.parse;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -13,7 +12,7 @@ import java.util.*;
  */
 public class CssUtils {
 	private static final Collection<Character> QUOTE_CHARACTERS = Arrays.asList('"', '\'');
-	public static String convertCssToXpath(@NotNull String cssSelector) {
+	public static String convertCssToXpath(String cssSelector) {
 		String selector = cssSelector.replaceAll("\\s*>\\s*", ">"); //remove padding around >
 		selector = selector.replaceAll("\\s*\\+\\s*", "+"); //remove padding around +
 		selector = selector.replaceAll("\\s+", " "); //normalize whitespace
@@ -135,7 +134,7 @@ public class CssUtils {
 		return cssSelector;
 	}
 
-	static String convertCssAttributeSectionToXpath(@NotNull String attributeSection) {
+	static String convertCssAttributeSectionToXpath(String attributeSection) {
 		assert attributeSection.startsWith("[") && attributeSection.endsWith("]");
 
 		int index = indexOfNotQuoted(attributeSection, '=');
