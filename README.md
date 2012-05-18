@@ -1,4 +1,4 @@
-[![Build Status](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/badge/icon)](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/)
+[![Build Status](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/badge/icon)](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/lastCompletedBuild/testReport/)
 
 Description
 ===========
