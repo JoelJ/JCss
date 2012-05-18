@@ -1,0 +1,37 @@
+<project name="JCss" default="test" basedir=".">
+	<path id="external-jar-classpath">
+	  <fileset dir="lib">
+	    <include name="*.jar"/>
+	  </fileset>
+	</path>
+
+	<taskdef name="testng" classname="org.testng.TestNGAntTask" classpathref="external-jar-classpath"/>
+
+	<target name="init">
+		<tstamp/>
+		<mkdir dir="out"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source">
+		<javac srcdir="src" destdir="out"/>
+	</target>
+
+	<target name="test-compile" depends="compile" description="compile the source">
+		<javac srcdir="test" destdir="out" classpathref="external-jar-classpath"/>
+	</target>
+
+	<target name="clean">
+		<tstamp/>
+		<delete dir="out"/>
+	</target>
+
+	<fileset id="all.tests" dir="test">
+	    <include name="**/*Test.*"/>
+	</fileset>
+
+	<target name="test" depends="test-compile" description="compile the source">
+		<testng classfilesetref="all.tests" workingDir="." failureProperty="tests.failed" outputdir="out/testresults">
+			<classpath path="out"/>
+		</testng>
+	</target>
+</project>
