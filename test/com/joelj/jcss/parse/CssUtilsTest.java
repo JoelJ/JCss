@@ -65,6 +65,8 @@ public class CssUtilsTest {
 	public void testSection() {
 		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("*"), "*");
 		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("E"), "E");
+		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath(""), "*");
+		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("[atr]"), "*[@atr]");
 		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("E[atr]"), "E[@atr]");
 		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("E[atr=\"value\"]"), "E[@atr=\"value\"]");
 		DelayedAssert.assertEquals(CssUtils.convertCssSectionToXpath("E[atr~=\"value\"]"), "E[contains(concat(\" \",@atr,\" \"),concat(\" \",\"value\",\" \"))]");
