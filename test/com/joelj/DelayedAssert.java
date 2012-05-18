@@ -1,6 +1,5 @@
 package com.joelj;
 
-import org.jetbrains.annotations.Nullable;
 import org.testng.Assert;
 
 import java.io.PrintStream;
@@ -32,7 +31,7 @@ import java.util.List;
 public class DelayedAssert {
 	private static ThreadLocal<List<AssertionError>> delayedThrowable = new ThreadLocal<List<AssertionError>>();
 
-	public static void assertEquals(@Nullable Object actual, @Nullable Object expected, @Nullable String message) {
+	public static void assertEquals(Object actual, Object expected, String message) {
 		try {
 			org.testng.Assert.assertEquals(actual, expected, message);
 		} catch(AssertionError t) {
@@ -46,7 +45,7 @@ public class DelayedAssert {
 		}
 	}
 
-	public static void assertEquals(@Nullable Object actual, @Nullable Object expected) {
+	public static void assertEquals(Object actual, Object expected) {
 		assertEquals(actual, expected, null);
 	}
 
