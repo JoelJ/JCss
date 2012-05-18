@@ -73,9 +73,12 @@ public class CssDocumentTest {
 		Assert.assertTrue(element.hasAttribute("id"));
 	}
 
-	@Test(expectedExceptions = NoSuchElementException.class)
+	@Test
 	public void testDocument_findElement_doesntExist() throws Exception {
-		document.findElement("node#doesntexist");
+		try {
+			document.findElement("node#doesntexist");
+			Assert.fail("Searching findElement with a selector that doesn't match anything should throw an exception.");
+		} catch(NoSuchElementException ignore) {}
 	}
 
 	@Test
