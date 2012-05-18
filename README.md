@@ -1,3 +1,5 @@
+[![Build Status](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/badge/icon)](https://buildhive.cloudbees.com/job/JoelJ/job/JCss/)
+
 Description
 ===========
 JCss is a simple library for querying XML structures via CSS.
