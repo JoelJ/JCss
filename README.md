@@ -30,8 +30,13 @@ Example.java
 			assert result.size() == 2;
 
 			CssNode node = document.findElement("three#anId");
-			assert node.getName() == "three";
+			assert node.getName().equals("three");
 			assert node.hasAttribute("id");
-			assert node.getAttribute("id") == "anId";
+			assert node.getAttribute("id").equals("anId");
+
+			CssNode root = document.findElement("root");
+			CssNode threeClass1 = root.findElement("three.class1");
+			assert threeClass1.getName("class").equals("three");
+			assert threeClass1.hasAttribute("class");
     	}
 	}
