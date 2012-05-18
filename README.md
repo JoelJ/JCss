@@ -38,5 +38,8 @@ Example.java
 			CssNode threeClass1 = root.findElement("three.class1");
 			assert threeClass1.getName("class").equals("three");
 			assert threeClass1.hasAttribute("class");
+
+			CssNode nestedNode = document.findElement("two three");
+			assert node.getName().equals("three");
     	}
 	}
