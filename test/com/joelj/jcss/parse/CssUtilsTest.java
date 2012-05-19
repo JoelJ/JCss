@@ -51,12 +51,16 @@ public class CssUtilsTest {
 		DelayedAssert.assertEquals(CssUtils.convertCssToXpath("E.myclass>F#myid2"), "//E[contains(concat(\" \",@class,\" \"),concat(\" \",\"myclass\",\" \"))]/F[@id=\"myid2\"]");
 		DelayedAssert.assertEquals(CssUtils.convertCssToXpath("E.myclass+F#myid2"), "//E[contains(concat(\" \",@class,\" \"),concat(\" \",\"myclass\",\" \"))]/following-sibling::*[1]/self::F[@id=\"myid2\"]");
 
+		DelayedAssert.assertEquals(CssUtils.convertCssToXpath(".myclass+#myid2"), "//*[contains(concat(\" \",@class,\" \"),concat(\" \",\"myclass\",\" \"))]/following-sibling::*[1]/self::*[@id=\"myid2\"]");
+
 		DelayedAssert.assertDelayed();
 	}
 
 	@Test
 	public void testSelectorsWithAttributes() {
 		DelayedAssert.assertEquals(CssUtils.convertCssToXpath("E[attr=\"value\"] F[attr]"), "//E[@attr=\"value\"]//F[@attr]");
+		DelayedAssert.assertEquals(CssUtils.convertCssToXpath("E[attr=\"value\"] [attr]"), "//E[@attr=\"value\"]//*[@attr]");
+		DelayedAssert.assertEquals(CssUtils.convertCssToXpath("[attr=\"value\"] [attr]"), "//*[@attr=\"value\"]//*[@attr]");
 
 		DelayedAssert.assertDelayed();
 	}
