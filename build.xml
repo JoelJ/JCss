@@ -4,25 +4,32 @@
 	    <include name="*.jar"/>
 	  </fileset>
 	</path>
+	<property name="major-version" value="0"/>
+	<property name="minor-version" value="1"/>
+
+	<property name="build" value="build"/>
+	<property name="testbuild" value="testbuild"/>
 
 	<taskdef name="testng" classname="org.testng.TestNGAntTask" classpathref="external-jar-classpath"/>
 
 	<target name="init">
 		<tstamp/>
-		<mkdir dir="out"/>
-	</target>
-
-	<target name="compile" depends="init" description="compile the source">
-		<javac srcdir="src" destdir="out"/>
-	</target>
-
-	<target name="test-compile" depends="compile" description="compile the source">
-		<javac srcdir="test" destdir="out" classpathref="external-jar-classpath"/>
 	</target>
 
 	<target name="clean">
 		<tstamp/>
-		<delete dir="out"/>
+		<delete dir="${build}"/>
+		<delete dir="${testbuild}"/>
+	</target>
+
+	<target name="compile" depends="init" description="compile the source">
+		<mkdir dir="${build}"/>
+		<javac srcdir="src" destdir="${build}"/>
+	</target>
+
+	<target name="test-compile" depends="compile" description="compile the source">
+		<mkdir dir="${testbuild}"/>
+		<javac srcdir="test" destdir="${testbuild}" classpathref="external-jar-classpath" classpath="${build}"/>
 	</target>
 
 	<fileset id="all.tests" dir="test">
@@ -30,8 +37,15 @@
 	</fileset>
 
 	<target name="test" depends="test-compile" description="compile the source">
-		<testng classfilesetref="all.tests" workingDir="." failureProperty="tests.failed" outputdir="out/testresults">
-			<classpath path="out"/>
+		<testng classfilesetref="all.tests" workingDir="." failureProperty="tests.failed" outputdir="${testbuild}/testresults">
+			<classpath path="${build}"/>
+			<classpath path="${testbuild}"/>
 		</testng>
 	</target>
+
+	<!--<target name="package" depends="compile">-->
+		<!--<jar jarfile="${build}/jcss-${major-version}.${minor-version}.jar">-->
+			<!--<classfileset dir="${build}"/>-->
+		<!--</jar>-->
+	<!--</target>-->
 </project>
