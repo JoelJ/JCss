@@ -87,4 +87,15 @@ public class CssDocumentTest {
 		Assert.assertEquals(elements.size(), 0);
 	}
 
+	@Test
+	public void testDocument_findOnlyByAttribute() throws CssExpressionException {
+		List<CssNode> elements = document.findElements(".class1");
+		Assert.assertEquals(elements.size(), 2);
+
+		elements = document.findElements("#anId");
+		Assert.assertEquals(elements.size(), 1);
+
+		elements = document.findElements(".class2 > .class1");
+		Assert.assertEquals(elements.size(), 1);
+	}
 }

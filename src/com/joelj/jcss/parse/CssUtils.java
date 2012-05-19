@@ -17,6 +17,10 @@ public class CssUtils {
 		selector = selector.replaceAll("\\s*\\+\\s*", "+"); //remove padding around +
 		selector = selector.replaceAll("\\s+", " "); //normalize whitespace
 
+		if(selector.matches(".*?[\\>\\+]{2,}.*?")) {
+			throw new CssParseException("Invalid CSS Selector: ''" + cssSelector + "''");
+		}
+
 		List<String> sections = split(selector);
 
 		StringBuilder sb = new StringBuilder("//");

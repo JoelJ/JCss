@@ -1,6 +1,7 @@
 package com.joelj.jcss.parse;
 
 import com.joelj.DelayedAssert;
+import com.joelj.jcss.dom.CssExpressionException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -200,4 +201,31 @@ public class CssUtilsTest {
 
 		DelayedAssert.assertDelayed();
 	}
+
+	@Test
+		public void testDocument_malformed() throws CssExpressionException {
+			try {
+				CssUtils.convertCssToXpath(".class2>>.class1");
+				Assert.fail("Should throw an exception CssParseException.");
+			} catch(CssParseException ignore) {
+			}
+
+			try {
+				CssUtils.convertCssToXpath(".class2++.class1");
+				Assert.fail("Should throw an exception CssParseException.");
+			} catch(CssParseException ignore) {
+			}
+
+			try {
+				CssUtils.convertCssToXpath(".class2+>.class1");
+				Assert.fail("Should throw an exception CssParseException.");
+			} catch(CssParseException ignore) {
+			}
+
+			try {
+				CssUtils.convertCssToXpath(".class2>+.class1");
+				Assert.fail("Should throw an exception CssParseException.");
+			} catch(CssParseException ignore) {
+			}
+		}
 }
