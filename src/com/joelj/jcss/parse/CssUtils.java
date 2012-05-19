@@ -100,10 +100,16 @@ public class CssUtils {
 
 		int openBracketIndex = indexOfNotQuoted(cssSelector, '[');
 		if(openBracketIndex < 0) {
+			if(cssSelector.isEmpty()) {
+				return "*";
+			}
 			return cssSelector;
 		}
 
 		String tagName = cssSelector.substring(0, openBracketIndex);
+		if(tagName.isEmpty()) {
+			tagName = "*";
+		}
 
 		int closeBracketIndex = indexOfNotQuoted(cssSelector, ']', openBracketIndex + 1);
 		if(closeBracketIndex < 0) {
