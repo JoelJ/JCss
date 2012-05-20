@@ -1,5 +1,6 @@
 .idea/
 out/
-test-out/
+testbuild/
+build/
 *.iml
 .DS_Store
