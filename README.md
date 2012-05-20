@@ -28,7 +28,7 @@ Example.java
 	public class Example {
 		public static void main(String[] args) {
 			CssDocument document = new CssDocument(new File("example.xml"));
-			List<CssNode> result = document.findElements("*.class1");
+			List<CssNode> result = document.findElements(".class1");
 			assert result.size() == 2;
 
 			CssNode node = document.findElement("three#anId");
