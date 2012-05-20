@@ -1,4 +1,4 @@
-<project name="JCss" default="test" basedir=".">
+<project name="JCss" default="test-package" basedir=".">
 	<path id="external-jar-classpath">
 	  <fileset dir="lib">
 	    <include name="*.jar"/>
@@ -16,18 +16,18 @@
 		<tstamp/>
 	</target>
 
-	<target name="clean">
+	<target name="clean" description="Deletes all the build folders.">
 		<tstamp/>
 		<delete dir="${build}"/>
 		<delete dir="${testbuild}"/>
 	</target>
 
-	<target name="compile" depends="init" description="compile the source">
+	<target name="compile" depends="init" description="Compile the source.">
 		<mkdir dir="${build}"/>
 		<javac srcdir="src" destdir="${build}"/>
 	</target>
 
-	<target name="test-compile" depends="compile" description="compile the source">
+	<target name="test-compile" depends="compile" description="Compile the test source">
 		<mkdir dir="${testbuild}"/>
 		<javac srcdir="test" destdir="${testbuild}" classpathref="external-jar-classpath" classpath="${build}"/>
 	</target>
@@ -36,16 +36,16 @@
 	    <include name="**/*Test.*"/>
 	</fileset>
 
-	<target name="test" depends="test-compile" description="compile the source">
+	<target name="test" depends="test-compile" description="Runs all the tests">
 		<testng classfilesetref="all.tests" workingDir="." failureProperty="tests.failed" outputdir="${testbuild}/testresults">
 			<classpath path="${build}"/>
 			<classpath path="${testbuild}"/>
 		</testng>
 	</target>
 
-	<!--<target name="package" depends="compile">-->
-		<!--<jar jarfile="${build}/jcss-${major-version}.${minor-version}.jar">-->
-			<!--<classfileset dir="${build}"/>-->
-		<!--</jar>-->
-	<!--</target>-->
+	<target name="package" depends="compile">
+		<jar destfile="${build}/jcss-${major-version}.${minor-version}.jar" basedir="${build}"/>
+	</target>
+
+	<target name="test-package" depends="compile,test,package" description="Builds, Tests, and Packages the build into a jar" />
 </project>
