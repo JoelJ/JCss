@@ -6,6 +6,7 @@
 	</path>
 	<property name="major-version" value="0"/>
 	<property name="minor-version" value="1"/>
+	<property name="build-version" value="0"/>
 
 	<property name="build" value="build"/>
 	<property name="testbuild" value="testbuild"/>
@@ -44,8 +45,8 @@
 	</target>
 
 	<target name="package" depends="compile">
-		<jar destfile="${build}/jcss-${major-version}.${minor-version}.jar" basedir="${build}"/>
+		<jar destfile="${build}/jcss-${major-version}.${minor-version}.${build-version}.jar" basedir="${build}"/>
 	</target>
 
-	<target name="test-package" depends="compile,test,package" description="Builds, Tests, and Packages the build into a jar" />
+	<target name="test-package" depends="clean,compile,test,package" description="Builds, Tests, and Packages the build into a jar" />
 </project>
